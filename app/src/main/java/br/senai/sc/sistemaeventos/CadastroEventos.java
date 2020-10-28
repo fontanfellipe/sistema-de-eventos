@@ -7,18 +7,15 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Date;
 
+import br.senai.sc.sistemaeventos.database.EventoDAO;
 import br.senai.sc.sistemaeventos.modelo.Evento;
 
 public class CadastroEventos extends AppCompatActivity {
-    EditText editTextNome;
 
-    private final int RESULT_CODE_NOVOEVENTO = 10;
-    private final int RESULT_CODE_EVENTOEDITADO = 11;
-
-    private boolean edicao = false;
     private int id = 0;
 
     @Override
@@ -41,14 +38,13 @@ public class CadastroEventos extends AppCompatActivity {
             editTextNome.setText(evento.getNome());
             editTextData.setText(String.valueOf(evento.getData()));
             editTextLocal.setText(evento.getLocal());
-            edicao = true;
+            //edicao = true;
             id = evento.getId();
         }
     }
 
     public void onClickVoltar(View v) {
-        Intent intent = new Intent(CadastroEventos.this, MainActivity.class);
-        startActivity(intent);
+        finish();
     }
 
     public void onClickSalvar(View v) {
@@ -60,6 +56,10 @@ public class CadastroEventos extends AppCompatActivity {
         String local = editTextLocal.getText().toString();
         String data = editTextData.getText().toString() ;
 
+        Evento evento = new Evento(id, nome, local, data);
+        EventoDAO eventoDAO = new EventoDAO(getBaseContext());
+        boolean salvou = eventoDAO.salvar(evento);
+
         if(nome.length() == 0) {
             editTextNome.setError("Insira o nome do evento");
         } else if (local.length() == 0) {
@@ -67,16 +67,13 @@ public class CadastroEventos extends AppCompatActivity {
         } else if (data.length() == 0) {
             editTextData.setError("Insira uma data para o evento");
         } else {
-            Evento evento = new Evento( id, nome, local, data);
-            Intent intent = new Intent();
-            if (edicao) {
-                intent.putExtra("eventoEditado", evento);
-                setResult(RESULT_CODE_EVENTOEDITADO, intent);
+            if(salvou){
+
+                finish();
             } else {
-                intent.putExtra("novoEvento", evento);
-                setResult(RESULT_CODE_NOVOEVENTO, intent);
+                Toast.makeText(CadastroEventos.this, "Erro ao salvar", Toast.LENGTH_LONG).show();
             }
-            finish();
+
         }
     }
 }
