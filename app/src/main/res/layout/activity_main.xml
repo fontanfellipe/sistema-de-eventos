@@ -18,6 +18,24 @@
             android:onClick="onClickNovoEvento"
             android:text="Cadastrar Novo Evento" />
 
+        <SearchView
+            android:id="@+id/busca_nome"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:visibility="visible" />
+
+        <SearchView
+            android:id="@+id/busca_local"
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
+        <Button
+            android:id="@+id/btn_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickOrdernar"
+            android:text="Sort" />
+
         <ListView
             android:id="@+id/listView_eventos"
             android:layout_width="match_parent"
