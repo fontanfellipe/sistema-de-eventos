@@ -19,22 +19,40 @@
             android:text="Cadastrar Novo Evento" />
 
         <SearchView
+            android:id="@+id/busca_local"
+            android:layout_width="match_parent"
+            android:layout_height="35dp">
+
+        </SearchView>
+
+        <SearchView
             android:id="@+id/busca_nome"
             android:layout_width="match_parent"
             android:layout_height="33dp"
-            android:visibility="visible" />
+            android:visibility="visible" >
 
-        <SearchView
-            android:id="@+id/busca_local"
+        </SearchView>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp" />
-
-        <Button
-            android:id="@+id/btn_sort"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onClickOrdernar"
-            android:text="Sort" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_sort_asc"
+                android:layout_width="195dp"
+                android:layout_height="wrap_content"
+                android:onClick="onClickOrdernarAsc"
+                android:text="Sort Asc" />
+
+            <Button
+                android:id="@+id/btn_sort_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickOrdernarDesc"
+                android:text="Sort Desc" />
+        </LinearLayout>
 
         <ListView
             android:id="@+id/listView_eventos"

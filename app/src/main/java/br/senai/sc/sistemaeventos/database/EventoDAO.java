@@ -15,7 +15,8 @@ import br.senai.sc.sistemaeventos.modelo.Evento;
 public class EventoDAO {
 
     private final String SQL_LISTAR_TODOS = "SELECT * FROM " + EventEntity.TABLE_NAME;
-    private final String SQL_ORDER_BY_NAME = "SELECT * FROM " + EventEntity.TABLE_NAME + " ORDER BY " + EventEntity.COLUMN_NAME_NOME + " ASC";
+    private final String SQL_ORDER_BY_NAME_ASC = "SELECT * FROM " + EventEntity.TABLE_NAME + " ORDER BY " + EventEntity.COLUMN_NAME_NOME + " ASC";
+    private final String SQL_ORDER_BY_NAME_DESC = "SELECT * FROM " + EventEntity.TABLE_NAME + " ORDER BY " + EventEntity.COLUMN_NAME_NOME + " DESC";
 
 
     private DBGateway dbGateway;
@@ -55,9 +56,25 @@ public class EventoDAO {
         return eventos;
     }
 
-    public List<Evento> ordernar() {
+    public List<Evento> ordernarAsc() {
         List<Evento> eventosOrdenados = new ArrayList<>();
-        Cursor cursor = dbGateway.getDatabase().rawQuery(SQL_ORDER_BY_NAME, null);
+        Cursor cursor = dbGateway.getDatabase().rawQuery(SQL_ORDER_BY_NAME_ASC, null);
+        while(cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndex(EventEntity._ID));
+            String nome = cursor.getString(cursor.getColumnIndex(EventEntity.COLUMN_NAME_NOME));
+            String local = cursor.getString(cursor.getColumnIndex(EventEntity.COLUMN_NAME_LOCAL));
+            String data = cursor.getString(cursor.getColumnIndex(EventEntity.COLUMN_NAME_DATA));
+
+            eventosOrdenados.add(new Evento(id, nome, local, data));
+        }
+        cursor.close();
+        return eventosOrdenados;
+    }
+
+
+    public List<Evento> ordernarDesc() {
+        List<Evento> eventosOrdenados = new ArrayList<>();
+        Cursor cursor = dbGateway.getDatabase().rawQuery(SQL_ORDER_BY_NAME_DESC, null);
         while(cursor.moveToNext()) {
             int id = cursor.getInt(cursor.getColumnIndex(EventEntity._ID));
             String nome = cursor.getString(cursor.getColumnIndex(EventEntity.COLUMN_NAME_NOME));

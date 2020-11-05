@@ -48,9 +48,15 @@ public class MainActivity extends AppCompatActivity {
         listViewEventos.setAdapter(adapterEventos);
     }
 
-    public void onClickOrdernar(View v) {
+    public void onClickOrdernarAsc(View v) {
         EventoDAO eventoDAO = new EventoDAO(getBaseContext());
-        adapterEventos = new ArrayAdapter<Evento>(MainActivity.this, android.R.layout.simple_list_item_1, eventoDAO.ordernar());
+        adapterEventos = new ArrayAdapter<Evento>(MainActivity.this, android.R.layout.simple_list_item_1, eventoDAO.ordernarAsc());
+        listViewEventos.setAdapter(adapterEventos);
+    }
+
+    public void onClickOrdernarDesc(View v) {
+        EventoDAO eventoDAO = new EventoDAO(getBaseContext());
+        adapterEventos = new ArrayAdapter<Evento>(MainActivity.this, android.R.layout.simple_list_item_1, eventoDAO.ordernarDesc());
         listViewEventos.setAdapter(adapterEventos);
     }
 
@@ -91,8 +97,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     private void definirLongClickListenerListView() {
         listViewEventos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
