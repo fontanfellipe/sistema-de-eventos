@@ -3,9 +3,7 @@ package br.senai.sc.sistemaeventos.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import androidx.annotation.Nullable;
-
 import br.senai.sc.sistemaeventos.database.contract.EventContract;
 
 public class DatabaseDBHelper extends SQLiteOpenHelper {

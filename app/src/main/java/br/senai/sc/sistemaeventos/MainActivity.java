@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<Evento> adapterEventos;
     private int id = 0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

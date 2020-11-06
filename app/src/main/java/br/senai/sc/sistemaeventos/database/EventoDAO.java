@@ -18,7 +18,6 @@ public class EventoDAO {
     private final String SQL_ORDER_BY_NAME_ASC = "SELECT * FROM " + EventEntity.TABLE_NAME + " ORDER BY " + EventEntity.COLUMN_NAME_NOME + " ASC";
     private final String SQL_ORDER_BY_NAME_DESC = "SELECT * FROM " + EventEntity.TABLE_NAME + " ORDER BY " + EventEntity.COLUMN_NAME_NOME + " DESC";
 
-
     private DBGateway dbGateway;
     private DatabaseDBHelper databaseDBHelper;
 
@@ -71,7 +70,6 @@ public class EventoDAO {
         return eventosOrdenados;
     }
 
-
     public List<Evento> ordernarDesc() {
         List<Evento> eventosOrdenados = new ArrayList<>();
         Cursor cursor = dbGateway.getDatabase().rawQuery(SQL_ORDER_BY_NAME_DESC, null);
@@ -87,17 +85,9 @@ public class EventoDAO {
         return eventosOrdenados;
     }
 
-
-
-
-
-
-
-
     public List<Evento> procurarNomeDAO(String queryNome) {
         List<Evento> eventosSearchNome = new ArrayList<>();
         final String SQL_SEARCH_NOME = "SELECT * FROM " + EventEntity.TABLE_NAME + " WHERE " + EventEntity.COLUMN_NAME_NOME + " LIKE " + "'%" + queryNome + "%'";
-
 
         Cursor cursor = dbGateway.getDatabase().rawQuery(SQL_SEARCH_NOME, null);
         while(cursor.moveToNext()) {
@@ -111,8 +101,6 @@ public class EventoDAO {
         cursor.close();
         return eventosSearchNome;
     }
-
-
 
     public List<Evento> procurarLocalDAO(String queryLocal) {
         List<Evento> eventosSearchLocal = new ArrayList<>();
@@ -136,10 +124,4 @@ public class EventoDAO {
     public int deleteItem(Evento evento){
         return dbGateway.getDatabase().delete(EventEntity.TABLE_NAME, EventEntity._ID + "=?", new String[]{String.valueOf(evento.getId())});
     }
-
-
-
-
-
-
 }
